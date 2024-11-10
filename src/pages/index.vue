@@ -12,13 +12,12 @@
             <!-- Pasta Selection -->
             <div>
                 <h5>Select Your Pasta</h5>
-                <div class="pasta-images">
-                    <div v-for="pasta in pastasList" :key="pasta.text" class="pasta-item">
-                        <img :src="pasta.src" :alt="pasta.text" class="pasta-image" />
-                        <p>{{ pasta.text }}</p>
+                <div class="pasta-images" @click="selectPasta">
+                    <div v-for="pasta in pastasList" :key="pasta.text" class="pasta-item" :class="{ selected: selectedPasta === pasta.text }">
+                        <img :src="pasta.src" :alt="pasta.text" class="pasta-image" :class="{ 'pasta-image-selected': selectedPasta === pasta.text }" />
+                        <p :class="{ 'bold-text': selectedPasta === pasta.text }">{{ pasta.text }}</p>
                     </div>
                 </div>
-                <v-select v-model="selectedPasta" :items="pastaOptions" label="Choose Pasta"></v-select>
             </div>
             <!-- Sauce Selection -->
             <div>
@@ -52,8 +51,6 @@ const pastasList = [
     { text: 'Tagliatelle', src: 'https://res.cloudinary.com/hesvvq3zo/image/upload/v1724314976/CARTA/PASTA-TRADIZIONALE/12_Pasta_Tradizionale_Tagliatelle.jpg' }
 ]
 
-const pastaOptions = ['Spaghetti', 'Penne', 'Fusilli', 'Tagliatelle'];
-
 const sauceOptions = ['Marinara', 'Alfredo', 'Pesto', 'Carbonara'];
 
 const selectedPasta = ref('');
@@ -63,6 +60,13 @@ const selectedSauce = ref('');
 const isMobile = computed(() => {
     return window.innerWidth < 768;
 });
+
+const selectPasta = (event) => {
+    const pastaItem = event.target.closest('.pasta-item');
+    if (pastaItem) {
+        selectedPasta.value = pastaItem.querySelector('p').textContent;
+    }
+};
 </script>
 
 <style scoped>
@@ -99,5 +103,14 @@ const isMobile = computed(() => {
     display: flex;
     flex-direction: column; /* Stack image and name vertically */
     align-items: center; /* Center items horizontally */
+}
+
+.pasta-image-selected {
+    width: 70px; /* Adjust size for selected pasta */
+    height: 70px; /* Adjust size for selected pasta */
+}
+
+.bold-text {
+    font-weight: bold; /* Make text bold for selected pasta */
 }
 </style>
