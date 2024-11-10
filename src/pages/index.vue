@@ -10,10 +10,16 @@
                 </v-toolbar>
             </v-header>
             <!-- Pasta Selection -->
-            <div>
+            <div class="pasta-selection">
                 <h5>Select Your Pasta</h5>
                 <div class="pasta-images" @click="selectPasta">
-                    <div v-for="pasta in pastasList" :key="pasta.text" class="pasta-item" :class="{ selected: selectedPasta === pasta.text }">
+                    <div v-for="pasta in pastasList1" :key="pasta.text" class="pasta-item" :class="{ selected: selectedPasta === pasta.text }">
+                        <img :src="pasta.src" :alt="pasta.text" class="pasta-image" :class="{ 'pasta-image-selected': selectedPasta === pasta.text }" />
+                        <p :class="{ 'bold-text': selectedPasta === pasta.text }">{{ pasta.text }}</p>
+                    </div>
+                </div>
+                <div class="pasta-images" @click="selectPasta">
+                    <div v-for="pasta in pastasList2" :key="pasta.text" class="pasta-item" :class="{ selected: selectedPasta === pasta.text }">
                         <img :src="pasta.src" :alt="pasta.text" class="pasta-image" :class="{ 'pasta-image-selected': selectedPasta === pasta.text }" />
                         <p :class="{ 'bold-text': selectedPasta === pasta.text }">{{ pasta.text }}</p>
                     </div>
@@ -43,12 +49,22 @@ const navLinks = [
     { text: "Jana's favourites", href: '#' }
 ];
 
-const pastasList = [
+const pastasList1 = [
     { text: 'Parppadelle', src: 'https://res.cloudinary.com/hesvvq3zo/image/upload/v1724314977/CARTA/PASTA-TRADIZIONALE/12_Pasta_Tradizionale_Parpadelle_al_pepe_nero.jpg' },
     { text: 'Gnocchi', src: 'https://res.cloudinary.com/hesvvq3zo/image/upload/v1724314972/CARTA/PASTA-TRADIZIONALE/12_Pasta_Tradizionale_Gnocchi_di_patata.jpg' },
     { text: 'Rigatoni', src: 'https://res.cloudinary.com/hesvvq3zo/image/upload/v1724314973/CARTA/PASTA-TRADIZIONALE/12_Pasta_Tradizionale_Rigatone.jpg' },
     { text: 'Spaghetti', src: 'https://res.cloudinary.com/hesvvq3zo/image/upload/v1724314974/CARTA/PASTA-TRADIZIONALE/12_Pasta_Tradizionale_Spaghetti.jpg' },
-    { text: 'Tagliatelle', src: 'https://res.cloudinary.com/hesvvq3zo/image/upload/v1724314976/CARTA/PASTA-TRADIZIONALE/12_Pasta_Tradizionale_Tagliatelle.jpg' }
+    { text: 'Tagliatelle', src: 'https://res.cloudinary.com/hesvvq3zo/image/upload/v1724314976/CARTA/PASTA-TRADIZIONALE/12_Pasta_Tradizionale_Tagliatelle.jpg' },
+    { text: 'Farfalle', src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ac/Farfalle_Pasta.JPG/1024px-Farfalle_Pasta.JPG' },
+]
+
+const pastasList2 = [
+    { text: 'Fusilli', src: 'https://zerostore.co.uk/wp-content/uploads/2020/12/image_887ba228-bcd1-4c04-8858-ed9b1a1ea83d.jpg' },
+    { text: 'Penne', src: 'https://www.the-pasta-project.com/wp-content/uploads/Penne-Pasta-1.jpg' },
+    { text: 'Orzo', src: 'https://www.hola.com/horizon/original_aspect_ratio/1d0242051cb2-orzo-interior-z.jpg?im=Resize=(960),type=downsize' },
+    { text: 'Lumaconi', src: 'https://fiorfiore-italianfood.com/wp-content/uploads/2020/01/Pasta_Lumaconi_mobile.jpg' },
+    { text: 'Chifferi', src: 'https://i.shgcdn.com/74600a26-66ea-40ba-8879-ab80225c3c46/-/format/auto/-/preview/3000x3000/-/quality/lighter/-/resize/900x/' },
+    { text: 'Fettuccini', src: 'https://www.foodiecrush.com/wp-content/uploads/2013/02/Lemon-Fettuccine-Alfredo-foodiecrush.com11.jpg' },
 ]
 
 const sauceOptions = ['Marinara', 'Alfredo', 'Pesto', 'Carbonara'];
@@ -86,10 +102,17 @@ const selectPasta = (event) => {
     border-radius: 20px;
 }
 
+.pasta-selection {
+    padding: 20px;
+}
+
 .pasta-images {
     display: flex;
-    justify-content: space-around;
+    flex-wrap: wrap;
+    justify-content: space-between;
     margin-bottom: 10px;
+    height: 120px;
+    align-items: center;
 }
 
 .pasta-image {
@@ -103,6 +126,8 @@ const selectPasta = (event) => {
     display: flex;
     flex-direction: column; /* Stack image and name vertically */
     align-items: center; /* Center items horizontally */
+    width: 70px; /* Set a fixed width for the pasta item */
+    height: 100px; /* Set a fixed height for the pasta item */
 }
 
 .pasta-image-selected {
