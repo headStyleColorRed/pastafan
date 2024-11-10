@@ -3,10 +3,10 @@
         <v-container fluid>
             <v-header>
                 <v-toolbar class="header" :style="{ flexDirection: isMobile ? 'column' : 'row' }">
-                    <v-toolbar-title class="logo">Title</v-toolbar-title>
+                    <v-toolbar-title class="logo">Pastas with Rodola</v-toolbar-title>
                     <v-spacer></v-spacer>
                     <v-btn text v-for="link in navLinks" :key="link.text" :href="link.href" v-if="!isMobile">{{ link.text }}</v-btn>
-                    <v-btn class="start-now" text>Log in</v-btn>
+                    <v-btn class="start-now" text>Let's decide</v-btn>
                 </v-toolbar>
             </v-header>
         </v-container>
@@ -17,15 +17,13 @@
 import { ref, computed } from 'vue';
 
 const navLinks = [
-    { text: 'Home', href: '#' },
-    { text: 'Profile', href: '#' },
-    { text: 'Blog', href: '#' },
-    { text: 'Forum', href: '#' },
-    { text: 'Help!', href: '#' },
+    { text: 'Recipies', href: '#' },
+    { text: 'Shops', href: '#' },
+    { text: "Jana's favourites", href: '#' }
 ];
 
 const isMobile = computed(() => {
-    return window.innerWidth < 768; // Adjust the width as needed for your design
+    return window.innerWidth < 768;
 });
 </script>
 
